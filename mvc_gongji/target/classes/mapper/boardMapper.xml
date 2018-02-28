@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.psy.mapper.boardMapper">
+ 	
+ 	<!-- 게시판 신규 글쓰기 -->
+ 	<insert id="create">
+ 		insert into gongji(title, date, content) values (#{title}, SYSDATE(), #{content})
+ 	</insert>
+ 	
+ 	<!-- 게시판 리스트 보기 -->
+ 	<select id="listAll" resultType="com.psy.dto.BoardVO">
+ 	<![CDATA[
+ 		select id, title, date, viewcnt from gongji
+ 		order by id desc
+ 	]]>
+ 	</select>
+ 	
+ 	<!-- 게시판 글 상세 보기 -->
+ 	<select id="read" resultType="com.psy.dto.BoardVO">
+ 		select * from gongji where id = #{id}
+ 	</select>
+ 
+ 	<!-- 게시판 삭제하기 -->
+ 	<delete id="delete">
+ 		delete from gongji where id = #{id}
+ 	</delete>
+ 
+ 	<!-- 게시판 수정하기 -->
+ 	<update id="update">
+ 		update gongji set title = #{title}, content = #{content} where id = #{id}
+ 	</update>
+ 	
+ 	<!-- 조회수 업데이트 -->
+ 	<update id="increaseViewcnt">
+ 		update gongji set viewcnt = viewcnt + 1
+ 		where id = #{id}
+ 	</update>
+ 	
+ 	<select id="listPage" resultType="com.psy.dto.BoardVO">
+ 	<![CDATA[
+ 		select id, title, date, viewcnt, (select count(*) from gongji_comment where id = g.id) as commcnt
+ 		from gongji as g
+ 		where id > 0
+ 		order by id desc
+ 		limit #{page}, 10
+ 	]]>
+ 	</select>
+ 	
+ 	<select id="listCriteria" resultType="com.psy.dto.BoardVO">
+ 	<![CDATA[
+ 		select id, title, date, viewcnt from gongji
+ 		where id > 0
+ 		order by id desc
+ 		limit #{pageStart}, #{perPageNum}
+ 	]]>
+ 	</select>
+ 	
+ 	<select id="countPaging" resultType="int">
+ 	<![CDATA[
+ 		select count(id)
+ 		from gongji
+ 		where id > 0
+ 	]]>
+ 	</select>
+
+ </mapper>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.psy.mapper.replyMapper">
+ 
+ 	<select id="list" resultType="ReplyVO">
+ 		select * from gongji_comment
+ 		where id = #{id}
+ 		order by comment_id
+ 	</select>
+ 
+ 	<insert id="create">
+ 		insert into gongji_comment (id, comment_content, comment_writer)
+ 		values (#{id}, #{comment_content}, #{comment_writer})
+ 	</insert>
+ 	
+ 	<update id="update">
+ 		update gongji_comment set comment_content = #{comment_content}
+ 		where comment_id = #{comment_id}
+ 	</update>
+ 	
+ 	<delete id="delete">
+ 		delete from gongji_comment
+ 		where comment_id = #{comment_id}
+ 	</delete>
+ 	
+ 	<select id="listPage" resultType="ReplyVO">
+ 		select * from gongji_comment
+ 		where id = #{id}
+ 		order by comment_id
+ 		limit #{cri.pageStart}, #{cri.perPageNum}
+ 	</select>
+ 	
+ 	<select id="count" resultType="int">
+ 		select count(id)
+ 		from gongji_comment
+ 		where id = #{id}  
+ 	</select>
+ 
+ </mapper>
