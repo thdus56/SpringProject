@@ -29,6 +29,36 @@ DB와 연동하는 데 사용한 라이브러리는 MyBatis입니다.
 > - junit 4.12
 > - jackson-databind 2.8.6
 
+개발 전 준비
+-------------------
+1. Tomcat 7 설치
+
+- https://tomcat.apache.org 에 접속해서 Tomcat zip 파일을 다운받는다.
+[Download] - [Tomcat 7]- [7.0.85] - [Binary Distributions] - [Core] - zip click!
+다운 받은 뒤 zip 파일의 압축을 해제한다.
+
+![tomcat site](https://github.com/thdus56/SpringProject/blob/master/pic/tomcat7%20install.PNG?raw=true)
+ 
+ -  Eclipse에서 Server를 새로 만든다.
+Eclipse Menu의 [Window] - [Show View] - [Other...] click!
+Servers window에서 서버 더블 클릭!
+
+![New server Environment 1](https://github.com/thdus56/SpringProject/blob/master/pic/tomcat%20install2.PNG?raw=true)
+
+- 다운 받은 Tomcat zip 파일의 폴더 경로를 Tomcat Installation Directory에 입력하고 Finish를 클릭한다.
+
+![enter image description here](https://github.com/thdus56/SpringProject/blob/master/pic/tomcat%20install3.PNG?raw=true)
+
+2. Eclipse 내부에서 STS 설치
+- Eclipse Menu의 [Help] - [Eclipse Marketplace...] click!
+
+![sts_down1](https://github.com/thdus56/SpringProject/blob/master/pic/sts_down1.png?raw=true)
+
+- Find에 sts를 검색해서 Install!
+
+![sts_down2](https://github.com/thdus56/SpringProject/blob/master/pic/sts_down2.PNG?raw=true)
+
+
 DB 테이블 구조
 -------------------
 gongji 테이블은 글 목록 테이블이고,
