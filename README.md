@@ -36,13 +36,13 @@ gongji_comment 테이블은 댓글 테이블입니다.
 
 먼저 이 구조로 테이블을 생성하셔야 합니다.
 
-![table](https://github.com/thdus56/SpringProject/blob/master/%EA%B3%B5%EC%A7%80,%20%EB%8C%93%EA%B8%80%20%ED%85%8C%EC%9D%B4%EB%B8%94.PNG?raw=true)
+![table](https://github.com/thdus56/SpringProject/blob/master/pic/%EA%B3%B5%EC%A7%80,%20%EB%8C%93%EA%B8%80%20%ED%85%8C%EC%9D%B4%EB%B8%94.PNG?raw=true)
 
 gongji_comment 테이블에서 중요한 점은 외래키와 제약사항 설정입니다.
 gongi 테이블의 id를 참조하고 ON DELETE CASCADE 제약사항을 설정해서 
 게시글이 지워지면 댓글까지 지워지도록 했습니다.
 
-![enter image description here](https://github.com/thdus56/SpringProject/blob/master/%EB%8C%93%EA%B8%80%ED%85%8C%EC%9D%B4%EB%B8%94%20%EB%A7%8C%EB%93%A4%EA%B8%B0.PNG?raw=true)
+![enter image description here](https://github.com/thdus56/SpringProject/blob/master/pic/%EB%8C%93%EA%B8%80%ED%85%8C%EC%9D%B4%EB%B8%94%20%EB%A7%8C%EB%93%A4%EA%B8%B0.PNG?raw=true)
 
 게시판 기능
 ----------
