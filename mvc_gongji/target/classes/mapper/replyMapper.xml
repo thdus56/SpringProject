@@ -5,27 +5,32 @@
   
  <mapper namespace="com.psy.mapper.replyMapper">
  
+ 	<!-- 댓글 리스트 -->
  	<select id="list" resultType="ReplyVO">
  		select * from gongji_comment
  		where id = #{id}
  		order by comment_id
  	</select>
  
+ 	<!-- 댓글 작성 -->
  	<insert id="create">
  		insert into gongji_comment (id, comment_content, comment_writer)
  		values (#{id}, #{comment_content}, #{comment_writer})
  	</insert>
  	
+ 	<!-- 댓글 수정 -->
  	<update id="update">
  		update gongji_comment set comment_content = #{comment_content}
  		where comment_id = #{comment_id}
  	</update>
  	
+ 	<!-- 댓글 삭제 -->
  	<delete id="delete">
  		delete from gongji_comment
  		where comment_id = #{comment_id}
  	</delete>
  	
+ 	<!-- 댓글 리스트(페이징) -->
  	<select id="listPage" resultType="ReplyVO">
  		select * from gongji_comment
  		where id = #{id}
@@ -33,6 +38,7 @@
  		limit #{cri.pageStart}, #{cri.perPageNum}
  	</select>
  	
+ 	<!-- 댓글 개수 세기 -->
  	<select id="count" resultType="int">
  		select count(id)
  		from gongji_comment

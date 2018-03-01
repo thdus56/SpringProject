@@ -20,7 +20,9 @@
  	
  	<!-- 게시판 글 상세 보기 -->
  	<select id="read" resultType="com.psy.dto.BoardVO">
- 		select * from gongji where id = #{id}
+ 		select *, (select count(id) from gongji_comment where id = g.id) as commcnt
+ 		from gongji as g
+ 		where id = #{id}
  	</select>
  
  	<!-- 게시판 삭제하기 -->
@@ -39,9 +41,10 @@
  		where id = #{id}
  	</update>
  	
+ 	<!-- 게시판 리스트 보기(페이징) -->
  	<select id="listPage" resultType="com.psy.dto.BoardVO">
  	<![CDATA[
- 		select id, title, date, viewcnt, (select count(*) from gongji_comment where id = g.id) as commcnt
+ 		select g.id, title, date, viewcnt, (select count(*) from gongji_comment where id = g.id) as commcnt
  		from gongji as g
  		where id > 0
  		order by id desc
@@ -51,13 +54,15 @@
  	
  	<select id="listCriteria" resultType="com.psy.dto.BoardVO">
  	<![CDATA[
- 		select id, title, date, viewcnt from gongji
- 		where id > 0
+ 		select g.id, title, date, viewcnt, (select count(*) from gongji_comment where id = g.id) as commcnt
+ 		from gongji as g
+ 		where g.id > 0
  		order by id desc
  		limit #{pageStart}, #{perPageNum}
  	]]>
  	</select>
  	
+ 	<!-- 총 페이지 카운트 -->
  	<select id="countPaging" resultType="int">
  	<![CDATA[
  		select count(id)

@@ -6,13 +6,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>글 상세 보기</title>
+<!-- 부트스트랩 css 파일 -->
 <link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.css" />
-
-<!-- bootstrap.js 파일이 jQuery로 구성되어 있기 때문에 먼저 라이브러리 로드 -->
+<!-- jQuery 라이브러리 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-
+<!-- handlebars 자바스크립트 파일 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
-<!-- 스크립트 파일을 마지막에 적는 이유: 브라우저가 스크립트 파일을 읽는 데 시간이 어느 정도 걸리기 대문에 제일 마지막에 로드하기 위해 -->
+<!-- 부트스트랩 자바스크립트 파일 -->
 <script type="text/javascript" src="/resources/bootstrap/js/bootstrap.js"></script>
 
 <script>
@@ -33,7 +33,8 @@ function goDelete() {
 	read.submit();
 }
 </script>
-	
+
+<!-- handlebars 출력 템플릿 -->	
 <script id="template" type="text/x-handlebars-template">
 <table class="table table-bordered">
 {{#each .}}
@@ -52,6 +53,7 @@ function goDelete() {
 </table>
 </script>
 
+<!-- 날짜 포맷 변경(handlebars 기능 확장) -->
 <script>
 Handlebars.registerHelper("prettifyDate", function(timeValue){
 	var dateObj = new Date(timeValue);
@@ -75,12 +77,12 @@ var printData = function (replyArr, target, templateObject) {
 </script>	
 	
 <script>
-var id = ${boardVO.id};
-var replyPage = 1;
+var id = ${boardVO.id};			// 게시물 번호
+var replyPage = 1;				// 댓글 페이지 번호
 
 $(document).ready(function() {
 
-	
+	// 댓글 페이징 처리
 	function getPage(pageInfo) {
 		$.getJSON(pageInfo, function(data) {
 			printData(data.list, $("#repliesDiv"), $('#template'));
@@ -90,6 +92,7 @@ $(document).ready(function() {
 		});
 	}
 	
+	// pagination UI 구성
 	var printPaging = function(pageMaker, target) {
 		var str = "";
 		
@@ -98,8 +101,15 @@ $(document).ready(function() {
 		}
 		
 		for (var i=pageMaker.startPage, len=pageMaker.endPage; i <= len; i++) {
-			var strClass = pageMaker.cri.page == i? ' active' : '';
-			str += "<li class='page-item'"+strClass+"><a class='page-link' href='"+i+"'>"+i+"</a></li>";
+			
+			var strClass = "";
+			if (pageMaker.cri.page == i) {
+				strClass = "page-item active"; 
+			} else {
+				strClass = "page-item";
+			}
+			
+			str += "<li class='"+strClass+"'><a class='page-link' href='"+i+"'>"+i+"</a></li>";
 		}
 		
 		if (pageMaker.next) {
@@ -109,6 +119,7 @@ $(document).ready(function() {
 		target.html(str);
 	}
 	
+	// '댓글 목록' 버튼 클릭 이벤트 (댓글 목록 출력)
 	$("#repliesDiv").on("click", function() {
 		
 		if($(".timeline li").size() > 1) {
@@ -118,15 +129,17 @@ $(document).ready(function() {
 		getPage("/replies/" + id + "/1");
 	});
 	
+	// 댓글 페이징 이벤트 처리
 	$(".pagination").on("click", "li a", function(event) {
 		event.preventDefault();
+		
 		replyPage = $(this).attr("href");
-		//alert("id: " + id + "/replyPage: " +replyPage);
+		
 		getPage("/replies/" + id + "/" + replyPage);
 	
 	});
 
-	
+	// 댓글 쓰기의 '확인' 버튼 클릭 이벤트
 	$("#replyAddBtn").on("click", function() {
 		
 		var replyerObj = $("#newReplyWriter");
@@ -154,6 +167,7 @@ $(document).ready(function() {
 			}});
 	});
 	
+	
 	$(".timeline").on("click", ".replyLi", function(event){
 		
 		var reply = $(this);
@@ -163,6 +177,7 @@ $(document).ready(function() {
 	
 	});
 	
+	// Modal창에서 댓글 수정 버튼 클릭 이벤트
 	$("#replyModBtn").on("click", function() {
 		
 		var comment_id = $(".modal-title").html();
@@ -187,6 +202,7 @@ $(document).ready(function() {
 		}});
 	});
 	
+	// Modal창에서 댓글 삭제 버튼 클릭 이벤트
 	$("#replyDelBtn").on("click", function() {
 		
 		var comment_id = $(".modal-title").html();
@@ -220,7 +236,7 @@ $(document).ready(function() {
 	<p class="text-center h2">게시글 보기</p>
 	<br>
 	<form name="read" action="modifyPage" method="post">
-		
+		<!-- 수정, 삭제 작업에서 글번호 필요 -->
 		<input type="hidden" name="id" value="${boardVO.id}">
 		<input type="hidden" name="page" value="${cri.page}">
 		<input type="hidden" name="perPageNum" value="${cri.perPageNum}">
@@ -255,6 +271,7 @@ $(document).ready(function() {
 	
 	</form>
 	
+	<!-- 댓글 쓰기 폼 -->
 	<br><br>
 	<div class="row">
 		<div class="col-md-12">
@@ -262,14 +279,14 @@ $(document).ready(function() {
 			<div class="box box-success">
 				
 				<div class="box-header">
-					<h2 class="box-title">댓글 쓰기</h2>
+					<h4 class="box-title">댓글 쓰기</h4>
 				</div>
 				
 				<div class="box-body">
 					<label for="newReplyWriter">작성자</label>
-						<input class="form-control" type="text" placeholder="USER ID" id="newReplyWriter">
+						<input class="form-control" type="text" placeholder="USER ID" id="newReplyWriter" required>
 					<label for="newReplyText">댓글 내용</label>
-						<input class="form-control" type="text" placeholder="REPLY TEXT" id="newReplyText">	
+						<input class="form-control" type="text" placeholder="REPLY TEXT" id="newReplyText" required>	
 				</div>
 				<br>
 				<div class="box-footer">
@@ -283,13 +300,14 @@ $(document).ready(function() {
 	
 	<br><br>
 	<ul class="timeline">
-		<li class="time-label"><button type="button" class="btn btn-success" id="repliesDiv">댓글 목록</button><br></li>
+		<li class="time-label"><button type="button" class="btn btn-success" id="repliesDiv">댓글 목록[${boardVO.commcnt}]</button><br></li>
 	</ul>
 	
 	<div class="text-center">
 		<ul id="pagination" class="pagination pagination-sm justify-content-center no-margin"></ul>
 	</div>
 	
+	<!-- Modal -->
 	<div id="modifyModal" class="modal modal-primary fade" role="dialog">
 		<div class="modal-dialog">
 		
@@ -301,7 +319,7 @@ $(document).ready(function() {
 				</div>
 				
 				<div class="modal-body" data-commentid>
-					<p><input type="text" id="comment_content" class="form-control"></p>
+					<p><input type="text" id="comment_content" class="form-control" required></p>
 				</div>
 				
 				<div class="modal-footer">

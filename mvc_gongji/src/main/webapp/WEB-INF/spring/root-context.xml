@@ -13,7 +13,7 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
-	<!-- MySQL dataSource -->
+	<!-- MySQL dataSource(DB 연결 정보) -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
          <property name="url" value="jdbc:mysql://192.168.23.114:3306/kopoctc14?useSSL=false"></property>
@@ -30,15 +30,14 @@
 		<property name="mapperLocations" value="classpath:mapper/**/*Mapper.xml"></property>
 	</bean>
      
-    <!-- SQLSessionTemplate 설정하기: DAO 인터페이스를 만들었기 때문에 Mybatis에서 DAO 인터페이스를 구현하기 위해서 필요 -->
- 
+    <!-- SQLSessionTemplate : DAO 인터페이스를 만들었기 때문에 Mybatis에서 DAO 인터페이스를 구현하기 위해서 필요 -->
     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
     	<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>    
     </bean>
     
-    <!-- dao패키지를 자동으로 인식하기 위해 -->
+    <!-- dao 패키지를 자동 인식할 수 있도록 -->
     <context:component-scan base-package="com.psy.dao"></context:component-scan>
-    <!-- service 패키지 자동 인식 -->
+    <!-- service 패키지 자동 인식할 수 있도록 -->
     <context:component-scan base-package="com.psy.service"></context:component-scan>
 
 </beans>

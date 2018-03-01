@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<!-- JSTL(JSP - Standard Tag Library) -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page session="false" %>
@@ -9,9 +10,9 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>게시판 리스트</title>
 	<link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.css" />
-	<!-- bootstrap.js 파일이 jQuery로 구성되어 있기 때문에 먼저 라이브러리 로드 -->
+	<!-- jQuery 라이브러리 -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-	<!-- 스크립트 파일을 마지막에 적는 이유: 브라우저가 스크립트 파일을 읽는 데 시간이 어느 정도 걸리기 대문에 제일 마지막에 로드하기 위해 -->
+	<!-- bootstrap 자바스크립트 -->
 	<script type="text/javascript" src="/resources/bootstrap/js/bootstrap.js"></script>
 </head>
 <body>
@@ -25,7 +26,7 @@
 			<tr class="table-primary">
 				<th scope="col">번호</th>
 				<th scope="col">제목</th>
-				<th scope="col">등록일</th>
+				<th scope="col">작성일</th>
 				<th scope="col">조회수</th>
 			</tr>
 		</thead>
@@ -51,6 +52,7 @@
 	<br>
 	<button class="btn btn-primary float-right" type="button" id="btnInsert" onclick="location.href='${path}/gongji/register'">글쓰기</button>
 	
+	<!-- 페이지 번호 출력 -->
 	<div class="center-block">
 		<ul class="pagination justify-content-center">
 			

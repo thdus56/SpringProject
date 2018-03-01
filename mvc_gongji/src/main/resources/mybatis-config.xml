@@ -4,7 +4,7 @@
     "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
- 
+ 	<!-- typeAliases를 등록하면 Mapper의 parameterType이나 resultType 쓸 때 패키지명을 쓰지 않아도 됨 -->
 	<typeAliases>
 		<package name="com.psy.dto"/>
 	</typeAliases>

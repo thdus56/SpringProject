@@ -17,16 +17,16 @@
 	<table class="table table-bordered">
 		<tr>
 			<th class="table-primary" scope="row">제목</th>
-			<td><input type="text" class="form-control" name="title"></td>
+			<td><input type="text" class="form-control" name="title" required></td>
 		</tr>
 		<tr>
 			<th class="table-primary" scope="row">내용</th>
-			<td><textarea class="form-control" name="content" rows="15" cols="50"></textarea></td>
+			<td><textarea class="form-control" name="content" rows="15" cols="50" required></textarea></td>
 		</tr>
 	</table>
 	
 	<div class="btn-group float-right">	
-		<button type="button" class="btn btn-primary" id="btnList" onclick="location.href='${path}/board/board_list.do'">취소</button>
+		<button type="button" class="btn btn-primary" id="btnList" onclick="location.href='${path}/gongji/listPage'">취소</button>
 		<input type="submit" class="btn btn-primary" value="쓰기">
 	</div>
 	

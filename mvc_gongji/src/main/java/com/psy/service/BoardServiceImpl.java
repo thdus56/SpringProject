@@ -10,6 +10,7 @@ import com.psy.dao.BoardDAO;
 import com.psy.dto.BoardVO;
 import com.psy.dto.Criteria;
 
+// 서비스 구현 클래스에는 @service 어노테이션 필수(스프링의 빈으로 인식되기 위해)
 @Service
 public class BoardServiceImpl implements BoardService {
 

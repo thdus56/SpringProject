@@ -7,12 +7,6 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>글 수정 페이지</title>
 	<link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.css" />
-<script>
-function goList() {
-	modify.action="/gongji/listPage?page="+${cri.page}+"&perPageNum="+${cri.perPageNum};
-	modify.submit();
-}
-</script>
 </head>
 <body>
 
@@ -35,7 +29,7 @@ function goList() {
 				<td><input type="text" class="form-control" name="title" value="${boardVO.title}"></td>
 			</tr>
 			<tr>
-				<th class="table-primary" scope="row">날짜</th>
+				<th class="table-primary" scope="row">작성일</th>
 				<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${boardVO.date}" /></td>
 			</tr>
 			<tr>

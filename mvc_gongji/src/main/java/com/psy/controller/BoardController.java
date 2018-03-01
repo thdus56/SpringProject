@@ -56,7 +56,7 @@ public class BoardController {
 	// 글 상세조회 페이지(초기)
 	@RequestMapping(value = "/read", method = RequestMethod.GET)
 	public void read(@RequestParam("id") int id, Model model) throws Exception {
-		
+		// addAttribute를 할 때 아무 이름 없이 데이터를 넣으면 자동으로 클래스의 이름의 첫 글자를 소문자로 시작해서 사용
 		model.addAttribute(service.read(id));
 	
 	}
