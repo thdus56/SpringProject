@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory name="Mysql">
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://192.168.23.114:3306/kopoctc14?useSSL=false</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">911120</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        
+        <!-- c3p0 연결 풀 공급자 사용 -->
+    	<property name="hibernate.c3p0.min_size">5</property> 				<!-- 최소 JDBC 연결 수 -->
+       	<property name="hibernate.c3p0.max_size">20</property>				<!-- 최대 JDBC 연결 수 -->
+       	<property name="hibernate.c3p0.timeout">300</property>				<!-- 시간 제한 주기 -->
+       	<property name="hibernate.c3p0.max_statements">50</property>		<!-- 캐시 문장 -->
+       	<property name="hibernate.c3p0.idle_test_period">3000</property> 	<!-- 연결 자동 검증하기 전 유휴시간 -->
+	 	
+	 	<!-- SQL을 보기 좋은 형태로 표준 출력 -->
+		<property name="show_sql">true</property>       
+		<property name="format_sql">true</property>
+		<property name="hbm2ddl.auto">validate</property>		<!-- SessionFactory가 생성될 때 스키마 자동 생성 -->
+		
+		<!-- XML 매핑 파일 목록 --> 
+	 	<mapping resource="com/psy/dto/BoardVO.hbm.xml"/> 
+    </session-factory>
+ 
+</hibernate-configuration>
